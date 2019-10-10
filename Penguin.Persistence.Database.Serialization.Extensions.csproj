@@ -7,7 +7,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Database.Serialization.Extensions</PackageProjectUrl>
 	<PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
-    <Version>1.1.12</Version>
+    <Version>1.2.0</Version>
 	<IncludeSymbols>true</IncludeSymbols>    
 <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
@@ -25,9 +25,9 @@
     </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Penguin.Persistence.Database" Version="1.2.0" />
-    <PackageReference Include="Penguin.Reflection.Abstractions" Version="2.0.6" />
-    <PackageReference Include="Penguin.Reflection.Serialization" Version="2.0.12" />
+    <PackageReference Include="Penguin.Persistence.Database" Version="2.0.8" />
+    <PackageReference Include="Penguin.Reflection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Penguin.Reflection.Serialization" Version="3.0.6" />
   </ItemGroup>
 
   <ItemGroup>

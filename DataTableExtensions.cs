@@ -11,8 +11,6 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
     public static class DataTableExtensions
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
-        #region Methods
-
         /// <summary>
         /// Casts a DataTable into list of MetaObjects
         /// </summary>
@@ -20,9 +18,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <returns>A list of MetaObjects representing the data</returns>
         public static List<MetaObject> ToMetaObject(this DataTable dt)
         {
-            MetaConstructor c = new MetaConstructor(new MetaConstructor.ConstructorSettings()
+            MetaConstructor c = new MetaConstructor(new MetaConstructorSettings()
             {
-                AttributeIncludeSettings = AttributeIncludeSettings.None
+                AttributeIncludeSettings = AttributeIncludeSetting.None
             });
 
             List<MetaObject> MetaRows = new List<MetaObject>();
@@ -57,7 +55,5 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             return MetaRows;
         }
-
-        #endregion Methods
     }
 }

@@ -10,11 +10,10 @@ using System.Linq;
 namespace Penguin.Persistence.Database.Serialization.Extensions
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     public static class SqlParameterInfoExtensions
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
-        #region Methods
-
         /// <summary>
         /// Converts a SQL parameter into a MetaObject so that it can be serialized and displayed through a dynamic editor
         /// </summary>
@@ -23,9 +22,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <returns>A Meta representation of the SQL parameter</returns>
         public static MetaObject ToMetaObject(this SQLParameterInfo parameter, MetaConstructor c = null)
         {
-            c = c ?? new MetaConstructor(new MetaConstructor.ConstructorSettings()
+            c = c ?? new MetaConstructor(new MetaConstructorSettings()
             {
-                AttributeIncludeSettings = AttributeIncludeSettings.All
+                AttributeIncludeSettings = AttributeIncludeSetting.All
             });
 
             System.Type PersistenceType = TypeConverter.ToNetType(parameter.DATA_TYPE);
@@ -45,9 +44,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             if (PersistenceType == typeof(System.DateTime))
             {
-                MetaAttribute rangeAttribute = new MetaAttribute(-1);
-                rangeAttribute.Type = MetaType.FromConstructor(c, typeof(RangeAttribute));
-                rangeAttribute.Instance = MetaObject.FromConstructor(c, new RangeAttribute(PersistenceType, SqlDateTime.MinValue.ToString(), SqlDateTime.MaxValue.ToString()));
+                MetaAttribute rangeAttribute = new MetaAttribute(-1)
+                {
+                    Type = MetaType.FromConstructor(c, typeof(RangeAttribute)),
+                    Instance = MetaObject.FromConstructor(c, new RangeAttribute(PersistenceType, SqlDateTime.MinValue.ToString(), SqlDateTime.MaxValue.ToString()))
+                };
 
                 IList<IMetaAttribute> existingAttributes = toReturn.Property.Attributes.ToList();
 
@@ -69,9 +70,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         {
             MetaObject metaObject = new MetaObject();
 
-            c = c ?? new MetaConstructor(new MetaConstructor.ConstructorSettings()
+            c = c ?? new MetaConstructor(new MetaConstructorSettings()
             {
-                AttributeIncludeSettings = AttributeIncludeSettings.All
+                AttributeIncludeSettings = AttributeIncludeSetting.All
             });
 
             c.ClaimOwnership(metaObject);
@@ -82,14 +83,14 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
                 metaObject.AddProperty(prop);
             }
 
-            metaObject.Type = new MetaType("SqlStoredProc", metaObject.Properties);
-            metaObject.Type.CoreType = CoreType.Reference;
+            metaObject.Type = new MetaType("SqlStoredProc", metaObject.Properties)
+            {
+                CoreType = CoreType.Reference
+            };
 
             metaObject.RegisterConstructor(c);
 
             return metaObject;
         }
-
-        #endregion Methods
     }
 }
