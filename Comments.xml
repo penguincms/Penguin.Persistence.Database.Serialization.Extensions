@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Penguin.Persistence.Database.Serialization.Extensions.Local</name>
+        <name>Penguin.Persistence.Database.Serialization.Extensions</name>
     </assembly>
     <members>
         <member name="M:Penguin.Persistence.Database.Serialization.Extensions.DataTableExtensions.ToMetaObject(System.Data.DataTable)">
