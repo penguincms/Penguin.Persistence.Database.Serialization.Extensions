@@ -4,10 +4,12 @@
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Database.Serialization.Extensions</PackageProjectUrl>
     <Version>1.2.0</Version>
     <Description>Extension methods for converting data from MSSQL to MetaObjects for use in the Penguin.Reflection.Serialization system.</Description>
+    <AssemblyName>Penguin.Persistence.Database.Serialization.Extensions</AssemblyName>
+    <RootNamespace>Penguin.Persistence.Database.Serialization.Extensions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Reflection.Serialization" Version="3.0.7-T9M1HHH" />
-    <PackageReference Include="Penguin.Persistence.Database" Version="2.0.9-T9M1HHH" />
+    <PackageReference Include="Penguin.Reflection.Serialization" Version="3.0.7-T9M2XAX" />
+    <PackageReference Include="Penguin.Persistence.Database" Version="2.0.9-T9M2XAX" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>

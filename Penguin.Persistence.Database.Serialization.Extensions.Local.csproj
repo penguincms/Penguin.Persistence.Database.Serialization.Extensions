@@ -4,20 +4,22 @@
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Database.Serialization.Extensions</PackageProjectUrl>
     <Version>1.2.0</Version>
     <Description>Extension methods for converting data from MSSQL to MetaObjects for use in the Penguin.Reflection.Serialization system.</Description>
+    <AssemblyName>Penguin.Persistence.Database.Serialization.Extensions</AssemblyName>
+    <RootNamespace>Penguin.Persistence.Database.Serialization.Extensions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Penguin.Persistence.Database\Penguin.Persistence.Database.Local.csproj" />
     <ProjectReference Include="..\Penguin.Debugging\Penguin.Debugging.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Entities.Abstractions\Penguin.Entities.Abstractions.Local.csproj" />
     <ProjectReference Include="..\Penguin.Extensions.Exceptions\Penguin.Extensions.Exceptions.Local.csproj" />
     <ProjectReference Include="..\Penguin.Extensions.String\Penguin.Extensions.String.Local.csproj" />
     <ProjectReference Include="..\Penguin.Persistence.Abstractions\Penguin.Persistence.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Entities.Abstractions\Penguin.Entities.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Persistence.Database\Penguin.Persistence.Database.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Reflection\Penguin.Reflection.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection.Abstractions\Penguin.Reflection.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Threading.BackgroundWorker\Penguin.Threading.BackgroundWorker.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection.Serialization\Penguin.Reflection.Serialization.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection.Serialization.Abstractions\Penguin.Reflection.Serialization.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Reflection\Penguin.Reflection.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Threading.BackgroundWorker\Penguin.Threading.BackgroundWorker.Local.csproj" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>
