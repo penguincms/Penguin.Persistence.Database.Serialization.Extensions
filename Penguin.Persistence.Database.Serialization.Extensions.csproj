@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Penguin.Reflection.Serialization" Version="3.0.7-T9MJL4F" />
-    <PackageReference Include="Penguin.Persistence.Database" Version="2.0.9-T9MJL4F" />
+    <PackageReference Include="Penguin.Persistence.Database" Version="2.0.9-T9N916Q" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>
