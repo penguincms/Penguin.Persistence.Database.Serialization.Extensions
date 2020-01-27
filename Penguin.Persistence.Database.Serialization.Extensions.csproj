@@ -8,8 +8,8 @@
     <RootNamespace>Penguin.Persistence.Database.Serialization.Extensions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Reflection.Serialization" Version="3.0.7-T9QC72V" />
     <PackageReference Include="Penguin.Persistence.Database" Version="2.0.9-T9QE7NI" />
+    <PackageReference Include="Penguin.Reflection.Serialization" Version="3.0.7-T9QP5HE" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>
