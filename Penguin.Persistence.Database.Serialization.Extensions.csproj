@@ -6,6 +6,7 @@
     <Description>Extension methods for converting data from MSSQL to MetaObjects for use in the Penguin.Reflection.Serialization system.</Description>
     <AssemblyName>Penguin.Persistence.Database.Serialization.Extensions</AssemblyName>
     <RootNamespace>Penguin.Persistence.Database.Serialization.Extensions</RootNamespace>
+    <DocumentationFile>Penguin.Persistence.Database.Serialization.Extensions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Penguin.Persistence.Database" Version="2.0.9-T9QE7NI" />
