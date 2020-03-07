@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 namespace Penguin.Persistence.Database.Serialization.Extensions
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     public static class MetaObjectExtensions
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
@@ -21,11 +22,12 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             foreach (IMetaObject thisProperty in metaObject.Properties)
             {
-                SqlParameter thisparam = new SqlParameter();
+                SqlParameter thisparam = new SqlParameter
+                {
+                    Value = thisProperty.Value,
 
-                thisparam.Value = thisProperty.Value;
-
-                thisparam.ParameterName = thisProperty.Property.Name;
+                    ParameterName = thisProperty.Property.Name
+                };
 
                 toReturn.Add(thisparam);
             }
