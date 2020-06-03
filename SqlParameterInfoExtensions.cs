@@ -1,8 +1,9 @@
 ﻿using Penguin.Persistence.Abstractions.Attributes.Validation;
+using Penguin.Persistence.Database.Serialization.Extensions.Meta;
 using Penguin.Reflection.Abstractions;
 using Penguin.Reflection.Serialization.Abstractions.Interfaces;
+using Penguin.Reflection.Serialization.Abstractions.Wrappers;
 using Penguin.Reflection.Serialization.Constructors;
-using Penguin.Reflection.Serialization.Objects;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -20,8 +21,13 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <param name="parameter">The parameter to convert</param>
         /// <param name="c">The optional MetaConstructor to use as a start, for caching</param>
         /// <returns>A Meta representation of the SQL parameter</returns>
-        public static MetaObject ToMetaObject(this SQLParameterInfo parameter, MetaConstructor c = null)
+        public static DbMetaObject ToMetaObject(this SQLParameterInfo parameter, MetaConstructor c = null)
         {
+            if (parameter is null)
+            {
+                throw new System.ArgumentNullException(nameof(parameter));
+            }
+
             c = c ?? new MetaConstructor(new MetaConstructorSettings()
             {
                 AttributeIncludeSettings = AttributeIncludeSetting.All
@@ -29,11 +35,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             System.Type PersistenceType = TypeConverter.ToNetType(parameter.DATA_TYPE);
 
-            MetaType thisType = MetaType.FromConstructor(c, PersistenceType);
+            IMetaType thisType = new MetaTypeHolder(PersistenceType);
 
-            MetaObject toReturn = new MetaObject()
+            DbMetaObject toReturn = new DbMetaObject()
             {
-                Property = new MetaProperty()
+                Property = new DbMetaProperty()
                 {
                     Name = parameter.PARAMETER_NAME,
                     Type = thisType
@@ -44,17 +50,13 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             if (PersistenceType == typeof(System.DateTime))
             {
-                MetaAttribute rangeAttribute = new MetaAttribute(-1)
-                {
-                    Type = MetaType.FromConstructor(c, typeof(RangeAttribute)),
-                    Instance = MetaObject.FromConstructor(c, new RangeAttribute(PersistenceType, SqlDateTime.MinValue.ToString(), SqlDateTime.MaxValue.ToString()))
-                };
+                IMetaAttribute rangeAttribute = new MetaAttributeHolder(new RangeAttribute(PersistenceType, SqlDateTime.MinValue.ToString(), SqlDateTime.MaxValue.ToString()), false);
 
-                IList<IMetaAttribute> existingAttributes = toReturn.Property.Attributes.ToList();
+                List<IMetaAttribute> existingAttributes = toReturn.Property.Attributes.ToList();
 
                 existingAttributes.Add(rangeAttribute);
 
-                (toReturn.Property as MetaProperty).Attributes = existingAttributes;
+                toReturn.Property.Attributes = existingAttributes;
             }
 
             return toReturn;
@@ -66,9 +68,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <param name="parameters">A List of Sql parameters to serialize</param>
         /// <param name="c">The optional MetaConstructor to use as a start, for caching</param>
         /// <returns>A MetaObject representing a collection of the serialized parameters</returns>
-        public static MetaObject ToMetaObject(this IEnumerable<SQLParameterInfo> parameters, MetaConstructor c = null)
+        public static DbMetaObject ToMetaObject(this IEnumerable<SQLParameterInfo> parameters, MetaConstructor c = null)
         {
-            MetaObject metaObject = new MetaObject();
+            DbMetaObject metaObject = new DbMetaObject();
 
             c = c ?? new MetaConstructor(new MetaConstructorSettings()
             {
@@ -79,16 +81,14 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             foreach (SQLParameterInfo thisParam in parameters)
             {
-                MetaObject prop = thisParam.ToMetaObject(c);
-                metaObject.AddProperty(prop);
+                DbMetaObject prop = thisParam.ToMetaObject(c);
+                metaObject.Properties.Add(prop);
             }
 
-            metaObject.Type = new MetaType("SqlStoredProc", metaObject.Properties)
+            metaObject.Type = new DbMetaType("SqlStoredProc", metaObject.Properties)
             {
                 CoreType = CoreType.Reference
             };
-
-            metaObject.RegisterConstructor(c);
 
             return metaObject;
         }

@@ -18,6 +18,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <returns>A collection of SQL parameter definitions to concrete parameters</returns>
         public static List<SqlParameter> ToSqlParameters(this IMetaObject metaObject)
         {
+            if (metaObject is null)
+            {
+                throw new System.ArgumentNullException(nameof(metaObject));
+            }
+
             List<SqlParameter> toReturn = new List<SqlParameter>();
 
             foreach (IMetaObject thisProperty in metaObject.Properties)

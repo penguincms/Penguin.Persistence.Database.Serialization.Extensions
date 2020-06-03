@@ -1,4 +1,6 @@
-﻿using Penguin.Reflection.Abstractions;
+﻿using Penguin.Persistence.Database.Serialization.Extensions.Meta;
+using Penguin.Reflection.Abstractions;
+using Penguin.Reflection.Serialization.Abstractions.Wrappers;
 using Penguin.Reflection.Serialization.Constructors;
 using Penguin.Reflection.Serialization.Objects;
 using System.Collections.Generic;
@@ -16,28 +18,28 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// </summary>
         /// <param name="dt">The data table to be used as a source</param>
         /// <returns>A list of MetaObjects representing the data</returns>
-        public static List<MetaObject> ToMetaObject(this DataTable dt)
+        public static List<DbMetaObject> ToMetaObject(this DataTable dt)
         {
             MetaConstructor c = new MetaConstructor(new MetaConstructorSettings()
             {
                 AttributeIncludeSettings = AttributeIncludeSetting.None
             });
 
-            List<MetaObject> MetaRows = new List<MetaObject>();
+            List<DbMetaObject> MetaRows = new List<DbMetaObject>();
 
             foreach (DataRow dr in dt.Rows)
             {
-                MetaObject row = new MetaObject();
+                DbMetaObject row = new DbMetaObject();
 
                 foreach (DataColumn dc in dt.Columns)
                 {
-                    MetaObject item = new MetaObject();
+                    DbMetaObject item = new DbMetaObject();
 
-                    MetaType objectType = MetaType.FromConstructor(c, dc.DataType);
+                    MetaTypeHolder objectType = new MetaTypeHolder(dc.DataType);
 
                     item.Type = objectType;
 
-                    item.Property = new MetaProperty()
+                    item.Property = new DbMetaProperty()
                     {
                         Type = objectType,
                         Name = dc.ColumnName
@@ -45,10 +47,10 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
                     item.Value = dr[dc]?.ToString();
 
-                    row.AddProperty(item);
+                    row.Properties.Add(item);
                 }
 
-                row.Type = new MetaType("SqlRow", row.Properties) { CoreType = CoreType.Reference };
+                row.Type = new DbMetaType("SqlRow", row.Properties) { CoreType = CoreType.Reference };
 
                 MetaRows.Add(row);
             }
