@@ -20,10 +20,12 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <returns>A list of MetaObjects representing the data</returns>
         public static List<DbMetaObject> ToMetaObject(this DataTable dt)
         {
-            MetaConstructor c = new MetaConstructor(new MetaConstructorSettings()
+            if (dt is null)
             {
-                AttributeIncludeSettings = AttributeIncludeSetting.None
-            });
+                throw new System.ArgumentNullException(nameof(dt));
+            }
+
+            MetaConstructor c;
 
             List<DbMetaObject> MetaRows = new List<DbMetaObject>();
 

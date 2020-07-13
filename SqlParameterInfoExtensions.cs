@@ -21,17 +21,12 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <param name="parameter">The parameter to convert</param>
         /// <param name="c">The optional MetaConstructor to use as a start, for caching</param>
         /// <returns>A Meta representation of the SQL parameter</returns>
-        public static DbMetaObject ToMetaObject(this SQLParameterInfo parameter, MetaConstructor c = null)
+        public static DbMetaObject ToMetaObject(this SQLParameterInfo parameter)
         {
             if (parameter is null)
             {
                 throw new System.ArgumentNullException(nameof(parameter));
             }
-
-            c = c ?? new MetaConstructor(new MetaConstructorSettings()
-            {
-                AttributeIncludeSettings = AttributeIncludeSetting.All
-            });
 
             System.Type PersistenceType = TypeConverter.ToNetType(parameter.DATA_TYPE);
 
@@ -70,6 +65,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// <returns>A MetaObject representing a collection of the serialized parameters</returns>
         public static DbMetaObject ToMetaObject(this IEnumerable<SQLParameterInfo> parameters, MetaConstructor c = null)
         {
+            if (parameters is null)
+            {
+                throw new System.ArgumentNullException(nameof(parameters));
+            }
+
             DbMetaObject metaObject = new DbMetaObject();
 
             c = c ?? new MetaConstructor(new MetaConstructorSettings()
@@ -81,7 +81,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             foreach (SQLParameterInfo thisParam in parameters)
             {
-                DbMetaObject prop = thisParam.ToMetaObject(c);
+                DbMetaObject prop = thisParam.ToMetaObject();
                 metaObject.Properties.Add(prop);
             }
 

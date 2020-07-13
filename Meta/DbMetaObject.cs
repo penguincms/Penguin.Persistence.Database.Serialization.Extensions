@@ -11,6 +11,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 {
     public class DbMetaObject : IMetaObject
     {
+        public DbMetaObject this[string PropertyName] => this.Properties.FirstOrDefault(p => p.Property.Name == PropertyName);
+        IMetaObject IMetaObject.this[IMetaProperty metaProperty] => this[metaProperty.Name];
+        IMetaObject IMetaObject.this[string PropertyName] => this[PropertyName];
         public List<DbMetaObject> CollectionItems { get; set; }
 
         IReadOnlyList<IMetaObject> IMetaObject.CollectionItems => CollectionItems;
@@ -41,12 +44,6 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public string Value { get; set; }
 
-        public DbMetaObject this[string PropertyName] => this.Properties.FirstOrDefault(p => p.Property.Name == PropertyName);
-
-        IMetaObject IMetaObject.this[IMetaProperty metaProperty] => this[metaProperty.Name];
-
-        IMetaObject IMetaObject.this[string PropertyName] => this[PropertyName];
-
         public static DbMetaObject FromSimpleAttribute<T>(T source) where T : Attribute
         {
             DbMetaObject o = new DbMetaObject();
@@ -58,6 +55,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public static DbMetaObject FromSimpleProperty(PropertyInfo pi, DbMetaObject DbmParent, object oParent)
         {
+            if (pi is null)
+            {
+                throw new ArgumentNullException(nameof(pi));
+            }
+
             return new DbMetaObject()
             {
                 Property = DbMetaProperty.FromValueProperty(pi),
@@ -72,6 +74,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
         public bool HasProperty(string propertyName) => this.Properties.Any(p => p.Property.Name == propertyName);
 
         public bool IsRecursive() => false;
+
         public IMetaType TypeOf() => this.Type;
     }
 }
