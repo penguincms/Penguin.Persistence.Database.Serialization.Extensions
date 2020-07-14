@@ -18,7 +18,7 @@
             <param name="metaObject">The meta object containing the collection</param>
             <returns>A collection of SQL parameter definitions to concrete parameters</returns>
         </member>
-        <member name="M:Penguin.Persistence.Database.Serialization.Extensions.SqlParameterInfoExtensions.ToMetaObject(Penguin.Persistence.Database.SQLParameterInfo,Penguin.Reflection.Serialization.Constructors.MetaConstructor)">
+        <member name="M:Penguin.Persistence.Database.Serialization.Extensions.SqlParameterInfoExtensions.ToMetaObject(Penguin.Persistence.Database.SQLParameterInfo)">
             <summary>
             Converts a SQL parameter into a MetaObject so that it can be serialized and displayed through a dynamic editor
             </summary>
