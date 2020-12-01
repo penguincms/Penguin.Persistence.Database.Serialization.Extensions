@@ -9,8 +9,8 @@
     <DocumentationFile>Penguin.Persistence.Database.Serialization.Extensions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Persistence.Database" Version="5.0.1-TA56XNT" />
-    <PackageReference Include="Penguin.Reflection.Serialization" Version="5.0.1-TA56XNT" />
+    <PackageReference Include="Penguin.Persistence.Database" Version="5.0.1-TA5WW7O" />
+    <PackageReference Include="Penguin.Reflection.Serialization" Version="5.0.1-TA5WW7O" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>
