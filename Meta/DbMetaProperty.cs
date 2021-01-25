@@ -21,11 +21,14 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         IEnumerable<IMetaAttribute> IHasAttributes.Attributes => this.Attributes;
         public DbMetaType DeclaringType { get; set; }
-        IMetaType IMetaProperty.DeclaringType => DeclaringType;
+        IMetaType IMetaProperty.DeclaringType => this.DeclaringType;
         public string Name { get; set; }
         public IMetaType Type { get; set; }
 
-        public IMetaType TypeOf() => this.Type;
+        public IMetaType TypeOf()
+        {
+            return this.Type;
+        }
 
         internal static DbMetaProperty FromValueProperty(PropertyInfo pi)
         {

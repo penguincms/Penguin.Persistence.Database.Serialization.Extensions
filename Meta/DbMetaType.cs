@@ -37,9 +37,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public IReadOnlyList<IEnumValue> Values { get; private set; }
 
-        IMetaType IMetaType.BaseType => BaseType;
+        IMetaType IMetaType.BaseType => this.BaseType;
 
-        IMetaType IMetaType.CollectionType => CollectionType;
+        IMetaType IMetaType.CollectionType => this.CollectionType;
 
         public DbMetaType()
         {
@@ -98,6 +98,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         private DbMetaType BaseType { get; set; }
 
-        public IMetaType TypeOf() => this;
+        public IMetaType TypeOf()
+        {
+            return this;
+        }
     }
 }

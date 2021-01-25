@@ -1,7 +1,5 @@
-﻿using Penguin.Persistence.Abstractions.Attributes.Rendering;
-using Penguin.Reflection.Abstractions;
+﻿using Penguin.Reflection.Abstractions;
 using Penguin.Reflection.Serialization.Abstractions.Interfaces;
-using Penguin.Reflection.Serialization.Abstractions.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +14,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
         IMetaObject IMetaObject.this[string PropertyName] => this[PropertyName];
         public List<DbMetaObject> CollectionItems { get; set; }
 
-        IReadOnlyList<IMetaObject> IMetaObject.CollectionItems => CollectionItems;
+        IReadOnlyList<IMetaObject> IMetaObject.CollectionItems => this.CollectionItems;
 
         public bool Null { get; }
 
@@ -24,21 +22,21 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         IMetaObject IMetaObject.Parent
         {
-            get => Parent;
-            set => Parent = (DbMetaObject)value;
+            get => this.Parent;
+            set => this.Parent = (DbMetaObject)value;
         }
 
         public List<DbMetaObject> Properties { get; set; } = new List<DbMetaObject>();
 
-        IReadOnlyList<IMetaObject> IMetaObject.Properties => Properties;
+        IReadOnlyList<IMetaObject> IMetaObject.Properties => this.Properties;
 
         public DbMetaProperty Property { get; set; } = new DbMetaProperty();
 
-        IMetaProperty IMetaObject.Property => Property;
+        IMetaProperty IMetaObject.Property => this.Property;
 
         public DbMetaObject Template { get; set; }
 
-        IMetaObject IMetaObject.Template => Template;
+        IMetaObject IMetaObject.Template => this.Template;
 
         public IMetaType Type { get; set; }
 
@@ -69,12 +67,24 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
             };
         }
 
-        public CoreType GetCoreType() => CoreType.Reference;
+        public CoreType GetCoreType()
+        {
+            return CoreType.Reference;
+        }
 
-        public bool HasProperty(string propertyName) => this.Properties.Any(p => p.Property.Name == propertyName);
+        public bool HasProperty(string propertyName)
+        {
+            return this.Properties.Any(p => p.Property.Name == propertyName);
+        }
 
-        public bool IsRecursive() => false;
+        public bool IsRecursive()
+        {
+            return false;
+        }
 
-        public IMetaType TypeOf() => this.Type;
+        public IMetaType TypeOf()
+        {
+            return this.Type;
+        }
     }
 }
