@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Database.Serialization.Extensions</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/PenguinCMS/Penguin.Persistence.Database.Serialization.Extensions</PackageProjectUrl>
     <Version>5.0.5</Version>
     <Description>Extension methods for converting data from MSSQL to MetaObjects for use in the Penguin.Reflection.Serialization system.</Description>
     <AssemblyName>Penguin.Persistence.Database.Serialization.Extensions</AssemblyName>
@@ -9,8 +9,8 @@
     <DocumentationFile>Penguin.Persistence.Database.Serialization.Extensions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Persistence.Database" Version="5.0.6-TAEO1KM" />
-    <PackageReference Include="Penguin.Reflection.Serialization" Version="5.0.6-TAEO1KM" />
+    <PackageReference Include="Penguin.Reflection.Serialization" Version="5.0.6-TAHULSY" />
+    <PackageReference Include="Penguin.Persistence.Database" Version="5.0.6-TAHULSY" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>

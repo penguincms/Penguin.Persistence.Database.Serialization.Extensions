@@ -19,7 +19,6 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
         /// Converts a SQL parameter into a MetaObject so that it can be serialized and displayed through a dynamic editor
         /// </summary>
         /// <param name="parameter">The parameter to convert</param>
-        /// <param name="c">The optional MetaConstructor to use as a start, for caching</param>
         /// <returns>A Meta representation of the SQL parameter</returns>
         public static DbMetaObject ToMetaObject(this SQLParameterInfo parameter)
         {

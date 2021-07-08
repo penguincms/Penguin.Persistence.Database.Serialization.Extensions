@@ -24,8 +24,6 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
                 throw new System.ArgumentNullException(nameof(dt));
             }
 
-            MetaConstructor c;
-
             List<DbMetaObject> MetaRows = new List<DbMetaObject>();
 
             foreach (DataRow dr in dt.Rows)
