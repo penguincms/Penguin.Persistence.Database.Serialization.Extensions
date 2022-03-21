@@ -67,24 +67,12 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
             };
         }
 
-        public CoreType GetCoreType()
-        {
-            return CoreType.Reference;
-        }
+        public CoreType GetCoreType() => CoreType.Reference;
 
-        public bool HasProperty(string propertyName)
-        {
-            return this.Properties.Any(p => p.Property.Name == propertyName);
-        }
+        public bool HasProperty(string propertyName) => this.Properties.Any(p => p.Property.Name == propertyName);
 
-        public bool IsRecursive()
-        {
-            return false;
-        }
+        public bool IsRecursive() => false;
 
-        public IMetaType TypeOf()
-        {
-            return this.Type;
-        }
+        public IMetaType TypeOf() => this.Type;
     }
 }

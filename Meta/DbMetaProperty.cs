@@ -25,14 +25,8 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
         public string Name { get; set; }
         public IMetaType Type { get; set; }
 
-        public IMetaType TypeOf()
-        {
-            return this.Type;
-        }
+        public IMetaType TypeOf() => this.Type;
 
-        internal static DbMetaProperty FromValueProperty(PropertyInfo pi)
-        {
-            throw new NotImplementedException();
-        }
+        internal static DbMetaProperty FromValueProperty(PropertyInfo pi) => throw new NotImplementedException();
     }
 }
