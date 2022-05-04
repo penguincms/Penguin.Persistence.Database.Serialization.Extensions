@@ -98,6 +98,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         private DbMetaType BaseType { get; set; }
 
-        public IMetaType TypeOf() => this;
+        public IMetaType TypeOf()
+        {
+            return this;
+        }
     }
 }

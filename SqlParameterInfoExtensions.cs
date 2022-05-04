@@ -71,7 +71,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             DbMetaObject metaObject = new DbMetaObject();
 
-            c = c ?? new MetaConstructor(new MetaConstructorSettings()
+            c =  c ?? new MetaConstructor(new MetaConstructorSettings()
             {
                 AttributeIncludeSettings = AttributeIncludeSetting.All
             });
