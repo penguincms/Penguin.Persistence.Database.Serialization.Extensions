@@ -18,9 +18,13 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
         };
 
         IEnumerable<IMetaAttribute> IHasAttributes.Attributes => Attributes;
+
         public DbMetaType DeclaringType { get; set; }
+
         IMetaType IMetaProperty.DeclaringType => DeclaringType;
+
         public string Name { get; set; }
+
         public IMetaType Type { get; set; }
 
         public IMetaType TypeOf()

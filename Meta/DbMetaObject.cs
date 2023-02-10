@@ -10,8 +10,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
     public class DbMetaObject : IMetaObject
     {
         public DbMetaObject this[string PropertyName] => Properties.FirstOrDefault(p => p.Property.Name == PropertyName);
+
         IMetaObject IMetaObject.this[IMetaProperty metaProperty] => this[metaProperty.Name];
+
         IMetaObject IMetaObject.this[string PropertyName] => this[PropertyName];
+
         public List<DbMetaObject> CollectionItems { get; set; }
 
         IReadOnlyList<IMetaObject> IMetaObject.CollectionItems => CollectionItems;

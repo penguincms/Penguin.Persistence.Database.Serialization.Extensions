@@ -13,6 +13,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
         public string AssemblyQualifiedName { get; set; }
 
         public IEnumerable<IMetaAttribute> Attributes { get; }
+
         public CoreType CoreType { get; set; }
 
         public string Default { get; set; }
