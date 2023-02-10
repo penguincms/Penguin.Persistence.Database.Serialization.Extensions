@@ -23,11 +23,11 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
                 throw new System.ArgumentNullException(nameof(metaObject));
             }
 
-            List<SqlParameter> toReturn = new List<SqlParameter>();
+            List<SqlParameter> toReturn = new();
 
             foreach (IMetaObject thisProperty in metaObject.Properties)
             {
-                SqlParameter thisparam = new SqlParameter
+                SqlParameter thisparam = new()
                 {
                     Value = thisProperty.Value,
 

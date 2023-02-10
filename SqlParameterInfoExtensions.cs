@@ -31,7 +31,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
 
             IMetaType thisType = new MetaTypeHolder(PersistenceType);
 
-            DbMetaObject toReturn = new DbMetaObject()
+            DbMetaObject toReturn = new()
             {
                 Property = new DbMetaProperty()
                 {
@@ -69,9 +69,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
                 throw new System.ArgumentNullException(nameof(parameters));
             }
 
-            DbMetaObject metaObject = new DbMetaObject();
+            DbMetaObject metaObject = new();
 
-            c =  c ?? new MetaConstructor(new MetaConstructorSettings()
+            c ??= new MetaConstructor(new MetaConstructorSettings()
             {
                 AttributeIncludeSettings = AttributeIncludeSetting.All
             });

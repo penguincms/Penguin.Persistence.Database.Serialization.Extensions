@@ -11,23 +11,21 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
     {
         public List<IMetaAttribute> Attributes { get; set; } = new List<IMetaAttribute>()
         {
-
                 new MetaAttributeHolder(new DisplayAttribute()
                 {
                     GroupName = "grid"
                 }, false)
-
         };
 
-        IEnumerable<IMetaAttribute> IHasAttributes.Attributes => this.Attributes;
+        IEnumerable<IMetaAttribute> IHasAttributes.Attributes => Attributes;
         public DbMetaType DeclaringType { get; set; }
-        IMetaType IMetaProperty.DeclaringType => this.DeclaringType;
+        IMetaType IMetaProperty.DeclaringType => DeclaringType;
         public string Name { get; set; }
         public IMetaType Type { get; set; }
 
         public IMetaType TypeOf()
         {
-            return this.Type;
+            return Type;
         }
 
         internal static DbMetaProperty FromValueProperty(PropertyInfo pi)

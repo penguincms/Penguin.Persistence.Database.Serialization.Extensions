@@ -37,9 +37,9 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public IReadOnlyList<IEnumValue> Values { get; private set; }
 
-        IMetaType IMetaType.BaseType => this.BaseType;
+        IMetaType IMetaType.BaseType => BaseType;
 
-        IMetaType IMetaType.CollectionType => this.CollectionType;
+        IMetaType IMetaType.CollectionType => CollectionType;
 
         public DbMetaType()
         {
@@ -52,31 +52,28 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
         //}
         public DbMetaType(string Name, IEnumerable<DbMetaObject> properties)
         {
-            this.Name = this.AssemblyQualifiedName = Name;
-            this.Namespace = "Dynamic";
+            this.Name = AssemblyQualifiedName = Name;
+            Namespace = "Dynamic";
 
-            this.Properties = properties.Select(p => p.Property).ToList();
+            Properties = properties.Select(p => p.Property).ToList();
         }
 
         public static DbMetaType FromValueType(Type t)
         {
-            if (t is null)
-            {
-                throw new ArgumentNullException(nameof(t));
-            }
-
-            return new DbMetaType()
-            {
-                AssemblyQualifiedName = t.AssemblyQualifiedName,
-                FullName = t.FullName,
-                IsArray = t.IsArray,
-                Default = t.GetDefaultValue().ToString(),
-                IsEnum = t.IsEnum,
-                IsNumeric = t.IsNumericType(),
-                Name = t.Name,
-                Namespace = t.Namespace,
-                Values = MetaType.GetEnumValues(t)
-            };
+            return t is null
+                ? throw new ArgumentNullException(nameof(t))
+                : new DbMetaType()
+                {
+                    AssemblyQualifiedName = t.AssemblyQualifiedName,
+                    FullName = t.FullName,
+                    IsArray = t.IsArray,
+                    Default = t.GetDefaultValue().ToString(),
+                    IsEnum = t.IsEnum,
+                    IsNumeric = t.IsNumericType(),
+                    Name = t.Name,
+                    Namespace = t.Namespace,
+                    Values = MetaType.GetEnumValues(t)
+                };
         }
 
         //public static DbMetaType FromComplexType(Type t)

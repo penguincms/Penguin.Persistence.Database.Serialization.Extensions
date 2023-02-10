@@ -9,12 +9,12 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 {
     public class DbMetaObject : IMetaObject
     {
-        public DbMetaObject this[string PropertyName] => this.Properties.FirstOrDefault(p => p.Property.Name == PropertyName);
+        public DbMetaObject this[string PropertyName] => Properties.FirstOrDefault(p => p.Property.Name == PropertyName);
         IMetaObject IMetaObject.this[IMetaProperty metaProperty] => this[metaProperty.Name];
         IMetaObject IMetaObject.this[string PropertyName] => this[PropertyName];
         public List<DbMetaObject> CollectionItems { get; set; }
 
-        IReadOnlyList<IMetaObject> IMetaObject.CollectionItems => this.CollectionItems;
+        IReadOnlyList<IMetaObject> IMetaObject.CollectionItems => CollectionItems;
 
         public bool Null { get; }
 
@@ -22,21 +22,21 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         IMetaObject IMetaObject.Parent
         {
-            get => this.Parent;
-            set => this.Parent = (DbMetaObject)value;
+            get => Parent;
+            set => Parent = (DbMetaObject)value;
         }
 
         public List<DbMetaObject> Properties { get; set; } = new List<DbMetaObject>();
 
-        IReadOnlyList<IMetaObject> IMetaObject.Properties => this.Properties;
+        IReadOnlyList<IMetaObject> IMetaObject.Properties => Properties;
 
         public DbMetaProperty Property { get; set; } = new DbMetaProperty();
 
-        IMetaProperty IMetaObject.Property => this.Property;
+        IMetaProperty IMetaObject.Property => Property;
 
         public DbMetaObject Template { get; set; }
 
-        IMetaObject IMetaObject.Template => this.Template;
+        IMetaObject IMetaObject.Template => Template;
 
         public IMetaType Type { get; set; }
 
@@ -44,7 +44,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public static DbMetaObject FromSimpleAttribute<T>(T source) where T : Attribute
         {
-            DbMetaObject o = new DbMetaObject();
+            DbMetaObject o = new();
 
             o.Properties = (source?.GetType() ?? typeof(T)).GetProperties().Select(p => DbMetaObject.FromSimpleProperty(p, o, source)).ToList();
 
@@ -53,18 +53,15 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public static DbMetaObject FromSimpleProperty(PropertyInfo pi, DbMetaObject DbmParent, object oParent)
         {
-            if (pi is null)
-            {
-                throw new ArgumentNullException(nameof(pi));
-            }
-
-            return new DbMetaObject()
-            {
-                Property = DbMetaProperty.FromValueProperty(pi),
-                Parent = DbmParent,
-                Value = pi.GetValue(oParent).ToString(),
-                Type = DbMetaType.FromValueType(pi.PropertyType)
-            };
+            return pi is null
+                ? throw new ArgumentNullException(nameof(pi))
+                : new DbMetaObject()
+                {
+                    Property = DbMetaProperty.FromValueProperty(pi),
+                    Parent = DbmParent,
+                    Value = pi.GetValue(oParent).ToString(),
+                    Type = DbMetaType.FromValueType(pi.PropertyType)
+                };
         }
 
         public CoreType GetCoreType()
@@ -74,7 +71,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public bool HasProperty(string propertyName)
         {
-            return this.Properties.Any(p => p.Property.Name == propertyName);
+            return Properties.Any(p => p.Property.Name == propertyName);
         }
 
         public bool IsRecursive()
@@ -84,7 +81,7 @@ namespace Penguin.Persistence.Database.Serialization.Extensions.Meta
 
         public IMetaType TypeOf()
         {
-            return this.Type;
+            return Type;
         }
     }
 }

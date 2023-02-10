@@ -23,17 +23,17 @@ namespace Penguin.Persistence.Database.Serialization.Extensions
                 throw new System.ArgumentNullException(nameof(dt));
             }
 
-            List<DbMetaObject> MetaRows = new List<DbMetaObject>();
+            List<DbMetaObject> MetaRows = new();
 
             foreach (DataRow dr in dt.Rows)
             {
-                DbMetaObject row = new DbMetaObject();
+                DbMetaObject row = new();
 
                 foreach (DataColumn dc in dt.Columns)
                 {
-                    DbMetaObject item = new DbMetaObject();
+                    DbMetaObject item = new();
 
-                    MetaTypeHolder objectType = new MetaTypeHolder(dc.DataType);
+                    MetaTypeHolder objectType = new(dc.DataType);
 
                     item.Type = objectType;
 
