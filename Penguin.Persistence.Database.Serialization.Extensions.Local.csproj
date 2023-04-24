@@ -22,7 +22,6 @@
     <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection.Serialization\Penguin.Reflection.Serialization.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection.Serialization.Abstractions\Penguin.Reflection.Serialization.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Threading.BackgroundWorker\Penguin.Threading.BackgroundWorker.Local.csproj" />
   </ItemGroup>
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
 </Project>
